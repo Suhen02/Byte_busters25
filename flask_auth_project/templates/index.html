@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medi Predict</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="css/sstyle.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        
+        .logo {
+            color: white;
+            font-size: 24px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        
+
+.navbar {
+  list-style-type: none; 
+  margin: auto;
+  padding: 0;
+  
+  justify-content: center; 
+  background-color: #333; 
+}
+
+.navbar li {
+  margin: 0 15px; 
+}
+
+.navbar a {
+  text-decoration: none; 
+  color: white; 
+  font-weight: bold;
+  padding: 10px 15px; 
+  display: block;
+  transition: background-color 0.3s; 
+}
+
+.navbar a:hover {
+  background-color: #575757; 
+  border-radius: 5px; 
+}
+        
+
+        
+        .home {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            height: 100vh;
+            background: #f4f4f4;
+            padding-top: 80px; 
+        }
+
+        .home-img img{
+            width: 300px;
+            border-radius: 10px;
+            animation: myfirst 5s linear 2s infinite alternate;
+        }
+        @keyframes myfirst{
+            0%{
+                background-color: red;left: 0px;top: 0px;
+            }
+            50%{
+                background-color: blue; left: 200px; top: 200px;
+            }
+            100%{
+                background-color: red; left: 0px;top: 0px;
+            }
+        }
+
+        .btn {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 20px;
+            background: #68c69d;
+            color: #f4f4f4;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+
+        .btn:hover {
+            background: #ed4d62;
+        }
+
+        .about-content {
+            max-width: 900px;
+            color: black;
+            font-size: 20px;
+            padding: 20px;
+        }
+        .flex_div{
+            display: flex;
+            margin: 30px 30px;
+        
+        }
+        .home-content{
+            
+            
+            width: 450px;
+            margin-left: 90px;
+            margin-top: 20px;
+        }
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #f1f1f1;
+            color: #333;
+            
+            bottom: 0;
+            width: 100%;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+        }
+        @media (max-width: 720px) {
+    body {
+        background-color: #f0f0f0;
+        font-size: 14px;
+    }
+
+    header {
+        display: none;
+    }}
+    
+
+    </style>
+</head>
+<body>
+
+    
+       
+    <nav class="navbar navbar-expand-lg navbar-dark bg-secondry">
+        <div class="container">
+            <a class="navbar-brand" href="{{ url_for('home') }}" style="color: black;">
+                <i class="fas fa-heartbeat me-2" style="color: black;"></i>HealthRisk Predictor
+            </a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+               
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home" style="color: black;"><i class="fas fa-info-circle"></i> home</a>
+                    </li>
+                    {% if 'user_id' in session %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('dashboard') }}" style="color: black;">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('logout') }}" style="color: black;">Logout</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('login') }}" style="color: black;">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('register') }}" style="color: black;">Register</a>
+                    </li>
+                {% endif %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="#test" style="color: black;"><i class="fas fa-envelope" style="color: black;"></i> Test</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container" style="background-color: transparent;">
+        {% block content %}{% endblock %}
+    </div>
+    
+   
+    <section id="home" class="home">
+        <div class="flex_div">
+        <div class="home-img">
+            <img src="\static\images\img13.jpg" alt="Predicto">
+        </div>
+        <div class="home-content">
+            <h1 style="color: rgb(63, 63, 251);"><span >Welcome to HealthRisk Predictor</span></h1>
+            <P>"Empowering your health journey with AI-driven diabetes risk assessment – because prevention today leads to a healthier tomorrow."</P>
+        </div>
+    </div>
+    </section>
+   
+    
+    <section id="about" class="home">
+        <div class="about-content">
+            <h2>About</h2>
+            <p>
+                This comprehensive medical test panel is designed to assess your risk for Diabetes and Cardiovascular Diseases (CVD)—two of the most common and interconnected health conditions. It includes blood tests such as Fasting Blood Sugar, HbA1c, and Lipid Profile to evaluate blood glucose control and cholesterol levels. Additional assessments like Blood Pressure Monitoring and Electrocardiogram (ECG) help detect early signs of heart disease or hypertension. Early diagnosis through these tests allows for timely intervention, lifestyle modification, and effective treatment planning. Medi Predict is dedicated to providing the best healthcare insights.
+            </p>
+        </div>
+    </section>
+
+    
+    <section id="test" class="home">
+        
+        <h2>Medical Test</h2>
+        <div class="container">
+            <h1>Health Risk Prediction</h1>
+            <div class="options">
+                <a href="/cvd_form" class="btn cvd-btn">CVD Prediction</a>
+                <a href="/diabetes_form" class="btn diabetes-btn">Diabetes Prediction</a>
+            </div>
+        </div>
+    </section>
+    <section>
+        <footer style="text-align: center; padding: 10px; background-color: #f1f1f1;">
+            <p>&copy; 2025 Your Company Name. All rights reserved.</p>
+            <p>Delveloped by Byte Butsers  team </p>
+        </footer></section>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    
+    
+</body>
+</html>
